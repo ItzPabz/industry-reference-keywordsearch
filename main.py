@@ -82,29 +82,34 @@ def get_file_content_from_github(file_path):
 
 def get_local_file_content(file_path):
     try:
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding='utf-8') as file:
             return file.read()
     except FileNotFoundError:
         return None
 
-def check_for_updates():
+def update_file(file_path):
+    github_content = get_file_content_from_github(file_path)
+    local_content = get_local_file_content(file_path)
+
+    if github_content is not None and (local_content is None or github_content != local_content):
+        with open(file_path, "w", encoding='utf-8') as file:
+            file.write(github_content)
+        return True
+    else:
+        return False
+
+def autoupdate():
     files_to_check = ["main.py", "functions.py"]
     update_available = False
 
     for file in files_to_check:
-        github_content = get_file_content_from_github(file)
-        local_content = get_local_file_content(file)
-
-        if github_content is None or local_content is None or github_content != local_content:
+        if update_file(file):
             update_available = True
-            break
 
     if update_available:
-        messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
+        messagebox.showinfo("Update Available", "Files have been updated. Please restart the application.")
     else:
         messagebox.showinfo("Up to Date", "You are using the latest version.")
-
-check_for_updates()
 
 def show_build_info():
     messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
@@ -146,6 +151,7 @@ def create_right_frame_components(frame_right, root, textarea_keyword_display):
     return textarea_results
 
 def main():
+    autoupdate()
     root = create_main_window()
     frame_left, frame_right = create_frames(root)
     textarea_keyword_display = create_left_frame_components(frame_left)
