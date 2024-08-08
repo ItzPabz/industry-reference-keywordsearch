@@ -73,7 +73,7 @@ def export_results(text_widget):
         messagebox.showinfo("Export Successful", f"Results exported to {filename}")
 
 def show_build_info():
-    messagebox.showinfo("Build Information", "Version: 1.0.0\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
+    messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 08 AUG 2024")
 
 def check_for_updates():
     repo_url = "https://github.com/ItzPabz/industry-reference-keywordsearch"
