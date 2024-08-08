@@ -30,11 +30,18 @@ def search_keywords(json_files, search_terms):
         name = json_data.get('name', '')
         for control in json_data.get('controls', []):
             control_keywords = control.get('keywords', [])
-            if any(term.lower() in keyword.lower() for term in search_terms for keyword in control_keywords):
-                control_with_prefix = control.copy()
-                control_with_prefix['id'] = f"{prefix} {control['id']}"
-                matches.append((name, control_with_prefix))
-                break
+            for term in search_terms:
+                if term.startswith('"') and term.endswith('"'):
+                    exact_term = term[1:-1]
+                    if any(exact_term.lower() == keyword.lower() for keyword in control_keywords):
+                        control_with_prefix = control.copy()
+                        control_with_prefix['id'] = f"{prefix} {control['id']}"
+                        matches.append((name, control_with_prefix))
+                else:
+                    if any(term.lower() in keyword.lower() for keyword in control_keywords):
+                        control_with_prefix = control.copy()
+                        control_with_prefix['id'] = f"{prefix} {control['id']}"
+                        matches.append((name, control_with_prefix))
     return matches
 
 def keyword_search(directory, search_terms):
