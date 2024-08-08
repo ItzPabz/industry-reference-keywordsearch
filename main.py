@@ -7,6 +7,7 @@ import tkinter.messagebox as messagebox
 import tkinter.filedialog
 import pywinstyles, sys
 from docx import Document
+import requests
 
 FONT_TITLE = ("Helvetica", 25, 'bold')
 FONT_INSTRUCTIONS = ("Helvetica", 14)
@@ -74,6 +75,19 @@ def export_results(text_widget):
 def show_build_info():
     messagebox.showinfo("Build Information", "Version: 1.0.0\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
 
+def check_for_updates():
+    repo_url = "https://github.com/ItzPabz/industry-reference-keywordsearch"
+    response = requests.get(repo_url)
+    if response.status_code == 200:
+        repo_content = response.text
+        if "main.py" in repo_content and "functions.py" in repo_content:
+            messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
+        else:
+            return True
+    else:
+        messagebox.showerror("Error", "Failed to fetch repository content.")
+
+
 def create_main_window():
     root = tkinter.Tk()
     sv_ttk.set_theme("dark")
@@ -117,7 +131,9 @@ def main():
     textarea_results = create_right_frame_components(frame_right, root, textarea_keyword_display)
     ttk.Button(frame_left, text="ANALYZE", style="Accent.TButton", width=48, command=lambda: analyze_keywords(textarea_keyword_display, textarea_results)).pack(pady=10)
     apply_theme_to_titlebar(root)
+    check_for_updates()
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
