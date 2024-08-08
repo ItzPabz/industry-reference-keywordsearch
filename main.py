@@ -104,6 +104,8 @@ def check_for_updates():
     else:
         messagebox.showinfo("Up to Date", "You are using the latest version.")
 
+check_for_updates()
+
 def show_build_info():
     messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
 
@@ -150,7 +152,6 @@ def main():
     textarea_results = create_right_frame_components(frame_right, root, textarea_keyword_display)
     ttk.Button(frame_left, text="ANALYZE", style="Accent.TButton", width=48, command=lambda: analyze_keywords(textarea_keyword_display, textarea_results)).pack(pady=10)
     apply_theme_to_titlebar(root)
-    check_for_updates()
     root.mainloop()
 
 
