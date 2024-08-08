@@ -107,9 +107,9 @@ def autoupdate():
             update_available = True
 
     if update_available:
-        messagebox.showinfo("Update Available", "Files have been updated. Please restart the application.")
+        messagebox.showinfo("Update Downloaded", "Files have been updated.")
     else:
-        messagebox.showinfo("Up to Date", "You are using the latest version.")
+        return False
 
 def show_build_info():
     messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
