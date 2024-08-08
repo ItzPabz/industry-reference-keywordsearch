@@ -72,21 +72,40 @@ def export_results(text_widget):
         doc.save(filename)
         messagebox.showinfo("Export Successful", f"Results exported to {filename}")
 
-def show_build_info():
-    messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 08 AUG 2024")
+def get_file_content_from_github(file_path):
+    raw_url = f"https://raw.githubusercontent.com/ItzPabz/industry-reference-keywordsearch/main/{file_path}"
+    response = requests.get(raw_url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return None
+
+def get_local_file_content(file_path):
+    try:
+        with open(file_path, "r") as file:
+            return file.read()
+    except FileNotFoundError:
+        return None
 
 def check_for_updates():
-    repo_url = "https://github.com/ItzPabz/industry-reference-keywordsearch"
-    response = requests.get(repo_url)
-    if response.status_code == 200:
-        repo_content = response.text
-        if "main.py" in repo_content and "functions.py" in repo_content:
-            return True
-        else:
-            messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
-    else:
-        messagebox.showerror("Error", "Failed to fetch repository content.")
+    files_to_check = ["main.py", "functions.py"]
+    update_available = False
 
+    for file in files_to_check:
+        github_content = get_file_content_from_github(file)
+        local_content = get_local_file_content(file)
+
+        if github_content is None or local_content is None or github_content != local_content:
+            update_available = True
+            break
+
+    if update_available:
+        messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
+    else:
+        messagebox.showinfo("Up to Date", "You are using the latest version.")
+
+def show_build_info():
+    messagebox.showinfo("Build Information", "Version: 1.1.2\nAuthor: Pablo David\nLast Revision: 06 AUG 2024")
 
 def create_main_window():
     root = tkinter.Tk()
