@@ -1,0 +1,20 @@
+{
+    "name": "Template Reference JSON File",
+    "prefix": "TEMPLATE EXAMPLE -",
+    "controls": [
+        {
+            "id": "XYZ-#1",
+            "name": "An example entry for a control",
+            "url": "https://www.example.com/control/......",
+            "control": "Short description of the control, or long... theres no limit",
+            "keywords": ["array of keywords", "that can be used", "to search for this control"]
+        },
+        {
+            "id": "XYZ-#1",
+            "name": "Another example entry for a control",
+            "url": "https://www.otherreferenceindustry.com/control/......",
+            "control": "Heres another example of a control, with a longer description that can be used to provide more information about the control. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, varius mi nec, euismod nunc. Nulla facilisi. Nullam et",
+            "keywords": ["additional", "keywords", "for this control"]
+        }
+    ]    
+}
