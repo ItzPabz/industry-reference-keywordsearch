@@ -81,9 +81,9 @@ def check_for_updates():
     if response.status_code == 200:
         repo_content = response.text
         if "main.py" in repo_content and "functions.py" in repo_content:
-            messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
-        else:
             return True
+        else:
+            messagebox.showinfo("Update Available", "An update is available. Please visit the repository to download the latest version.")
     else:
         messagebox.showerror("Error", "Failed to fetch repository content.")
 
