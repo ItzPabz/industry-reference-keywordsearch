@@ -19,9 +19,10 @@ The Industry Reference Keyword Search Tool is a desktop application built using 
   - `sv-ttk`
 
 ## Installation
-1. Clone or Download the Repository.
-2. Install the required packages using `pip install -r requirements.txt`. *Note: File path will need to be attached to the `requirements.txt` unless ran in an virtual environment.*
-3. Run the application using `python main.py`
+1. Download [Python](https://www.python.org/downloads/)
+2. Clone or Download the Repository.
+3. Install the required packages using `pip install -r requirements.txt`. *Note: File path will need to be attached to the `requirements.txt` unless ran in an virtual environment.*
+4. Run the application using `python main.py`
 
 ## Usage
 1. **Enter Keywords:** Entering all the keywords you are interested in into the box on the left hand side with them being seperated by a newline. *Note: The program does do partial matches!*
